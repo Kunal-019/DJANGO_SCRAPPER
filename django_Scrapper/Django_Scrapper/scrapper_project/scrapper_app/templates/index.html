@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Information</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1 {
+        font-weight: bold;
+    }
+    
+    h2 {
+        font-weight: bold;
+    }
+    
+    form {
+        margin-bottom: 20px;
+    }
+    
+    select {
+        font-size: 16px;
+        padding: 8px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #45a049;
+    }
+    
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }</style>
+</head>
+<body>
+    <h1>Select a Country</h1>
+    <form method="post">
+        {% csrf_token %}
+        <select name="selected_country" id="country-dropdown">
+            <option value="india">India</option>
+            <option value="australia">Australia</option>
+            <option value="brazil">Brazil</option>
+            <option value="afghanistan">Afghanistan</option>
+            <option value="malaysia">Malaysia</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if selected_country %}
+    <h2>Country Name = {{ selected_country | upper }}</h2>
+    <table border="1">
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Capital</td>
+            <td>{{ country_data.capital }}</td>
+        </tr>
+        <tr>
+            <td>Population</td>
+            <td>{{ country_data.population }}</td>
+        </tr>
+        <tr>
+            <td>Area</td>
+            <td>{{ country_data.area }}</td>
+        </tr>
+        <tr>
+            <td>GDP</td>
+            <td>{{ country_data.gdp }}</td>
+        </tr>
+        <tr>
+            <td>Country Code</td>
+            <td>{{ country_data.country_code }}</td>
+        </tr>
+        <tr>
+            <td>ISO Code</td>
+            <td>{{ country_data.iso }}</td>
+        </tr>
+    </table>
+    {% endif %}
+</body>
+</html>
